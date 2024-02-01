@@ -8,7 +8,8 @@ import javax.validation.constraints.NotNull;
 
 @Data
 @Builder
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 public class Item {
     private Long id;
     @NotNull(message = "Имя не может быть пустым")
