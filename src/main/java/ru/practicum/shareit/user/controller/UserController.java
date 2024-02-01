@@ -1,6 +1,6 @@
 package ru.practicum.shareit.user.controller;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,16 +12,13 @@ import ru.practicum.shareit.user.service.UserServiceImpl;
 import javax.validation.Valid;
 import java.util.Collection;
 
-/**
- * TODO Sprint add-controllers.
- */
 @RestController
 @Slf4j
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Validated
 @RequestMapping(path = "/users")
 public class UserController {
-    public UserServiceImpl userService;
+    public final UserServiceImpl userService;
 
     @PostMapping
     public UserDto createUser(@RequestBody @Valid UserDto userDto) {
