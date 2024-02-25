@@ -11,7 +11,7 @@ import java.util.List;
 public class ItemMapper {
     public static ItemDto mapToItemDto(Item item) {
         return ItemDto.builder()
-                .id(item.getItemId())
+                .id(item.getId())
                 .name(item.getName())
                 .description(item.getDescription())
                 .available(item.getAvailable())
@@ -22,7 +22,7 @@ public class ItemMapper {
     public static Item mapToItem(ItemDto itemDto) {
 
         return Item.builder()
-                .itemId(itemDto.getId())
+                .id(itemDto.getId())
                 .name(itemDto.getName())
                 .description(itemDto.getDescription())
                 .available(itemDto.getAvailable())
@@ -36,4 +36,5 @@ public class ItemMapper {
         }
         return valuesDtos;
     }
+
 }
