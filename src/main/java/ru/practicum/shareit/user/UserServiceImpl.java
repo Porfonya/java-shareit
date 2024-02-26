@@ -29,9 +29,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto updateUser(Long id, UserDto userDto) {
-        User existingUser = userRepository.getReferenceById(id);
-
-        userDto.setId(id);
+        UserDto existingUser = getUserById(id);
+         userDto.setId(id);
         userDto.setName(userDto.getName() == null ? existingUser.getName() : userDto.getName());
         userDto.setEmail(userDto.getEmail() == null ? existingUser.getEmail() : userDto.getEmail());
         return UserMapper.mapToUserDto(userRepository.save(UserMapper.mapToUser(userDto)));
@@ -42,7 +41,7 @@ public class UserServiceImpl implements UserService {
         if (userRepository.existsById(id)) {
             return UserMapper.mapToUserDto(userRepository.getReferenceById(id));
         } else {
-            throw new NotFoundException("Error");
+            throw new NotFoundException(String.format("Такой пользователь с Id %d не найден", id));
         }
 
     }
