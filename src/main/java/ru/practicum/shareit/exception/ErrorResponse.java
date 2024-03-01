@@ -1,11 +1,13 @@
 package ru.practicum.shareit.exception;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
 @Getter
 public class ErrorResponse {
 
     private final String message;
+
+    public ErrorResponse(String message) {
+        this.message = message;
+    }
 }
