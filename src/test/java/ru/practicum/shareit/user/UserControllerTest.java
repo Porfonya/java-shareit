@@ -50,14 +50,14 @@ class UserControllerTest {
 
     @Test
     void updateUser() {
+        UserDto dto = new UserDto();
+        Long userId = 1L;
+        when(userService.updateUser(userId, dto)).thenReturn(updateUser);
 
-        when(userService.updateUser(1L, updateUser)).thenReturn(updateUser);
-
-        ResponseEntity<UserDto> response = userController.updateUser(1L, updateUser);
+        ResponseEntity<UserDto> response = userController.updateUser(userId, dto);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(updateUser, response.getBody());
-
     }
 
     @Test
