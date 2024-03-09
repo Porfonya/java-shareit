@@ -12,15 +12,11 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import ru.practicum.shareit.checker.Checker;
 import ru.practicum.shareit.request.ItemRequest;
 import ru.practicum.shareit.user.User;
-import ru.practicum.shareit.user.UserDto;
-import ru.practicum.shareit.user.UserServiceImpl;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 
 @AutoConfigureMockMvc
 @ExtendWith(MockitoExtension.class)
@@ -109,7 +105,6 @@ class ItemControllerTest {
 
     @Test
     void getAllItemsByUserIdBookings() {
-
 
 
     }

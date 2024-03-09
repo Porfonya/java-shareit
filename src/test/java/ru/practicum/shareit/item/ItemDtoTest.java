@@ -5,13 +5,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.json.JsonTest;
 import org.springframework.boot.test.json.JacksonTester;
-import ru.practicum.shareit.user.UserDto;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
-import java.util.List;
 import java.util.Set;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
@@ -46,7 +44,6 @@ class ItemDtoTest {
         assertThat(result).hasJsonPath("$.nextBooking");
 
 
-
         assertThat(result).extractingJsonPathNumberValue("$.id").isEqualTo(dto.getId().intValue());
         assertThat(result).extractingJsonPathStringValue("$.name").isEqualTo(dto.getName());
         assertThat(result).extractingJsonPathStringValue("$.description").isEqualTo(dto.getDescription());
@@ -54,7 +51,6 @@ class ItemDtoTest {
         assertThat(result).extractingJsonPathStringValue("$.requestId").isEqualTo(null);
         assertThat(result).extractingJsonPathStringValue("$.lastBooking").isEqualTo(dto.getLastBooking());
         assertThat(result).extractingJsonPathStringValue("$.nextBooking").isEqualTo(dto.getNextBooking());
-
 
 
     }

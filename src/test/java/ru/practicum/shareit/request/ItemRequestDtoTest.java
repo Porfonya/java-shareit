@@ -5,25 +5,25 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.json.JsonTest;
 import org.springframework.boot.test.json.JacksonTester;
-import ru.practicum.shareit.item.ItemForRequestDto;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Set;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+
 @JsonTest
 class ItemRequestDtoTest {
     private Validator validator;
     @Autowired
     private JacksonTester<ItemRequestDto> json;
     private final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+
     @Test
     void testSerialize() throws Exception {
         var dto = ItemRequestDto.builder()
@@ -63,6 +63,7 @@ class ItemRequestDtoTest {
         Set<ConstraintViolation<ItemRequestDto>> violations = validator.validate(requestDto);
         assertFalse(violations.isEmpty());
     }
+
     @Test()
     public void testValidationWhenBlankThenThrowException() {
         ItemRequestDto requestDto = new ItemRequestDto();
