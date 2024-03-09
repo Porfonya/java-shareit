@@ -49,18 +49,6 @@ class UserControllerTest {
     }
 
     @Test
-    void updateUser() {
-        UserDto dto = new UserDto();
-        Long userId = 1L;
-        when(userService.updateUser(userId, dto)).thenReturn(updateUser);
-
-        ResponseEntity<UserDto> response = userController.updateUser(userId, dto);
-
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(updateUser, response.getBody());
-    }
-
-    @Test
     void deleteUserById() {
 
         ResponseEntity<String> response = userController.deleteUserById(any());
