@@ -1,15 +1,15 @@
 package ru.practicum.shareit.item;
 
-import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.shareit.booking.Booking;
-import ru.practicum.shareit.booking.BookingRepository;
 import ru.practicum.shareit.booking.BookingMapper;
-import ru.practicum.shareit.exception.NotFoundException;
+import ru.practicum.shareit.booking.BookingRepository;
+import ru.practicum.shareit.checker.Checker;
 import ru.practicum.shareit.exception.ValidationException;
+import ru.practicum.shareit.request.ItemRequest;
 import ru.practicum.shareit.user.User;
 import ru.practicum.shareit.user.UserRepository;
 
@@ -20,7 +20,6 @@ import java.util.List;
 import static ru.practicum.shareit.booking.BookingState.APPROVED;
 
 @Service
-@Builder
 @RequiredArgsConstructor
 @Slf4j
 @Transactional(readOnly = true)
@@ -30,14 +29,21 @@ public class ItemServiceImpl implements ItemService {
     private final UserRepository userRepository;
     private final BookingRepository bookingRepository;
     private final CommentRepository commentRepository;
+    private final Checker checker;
 
     @Transactional
     @Override
     public ItemDto createItem(Long userId, ItemDto itemDto) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new NotFoundException("User not found"));
+        User user = checker.checkerUserWithReturn(userId);
         Item thisItem = itemRepository.save(ItemMapper.mapToItem(itemDto));
         thisItem.setOwner(user);
+
+        if (itemDto.getRequestId() != null) {
+
+            ItemRequest itemRequest = checker.checkerItemRequest(itemDto.getRequestId());
+            thisItem.setItemRequest(itemRequest);
+            return ItemMapper.mapToItemRequestDto(thisItem);
+        }
         return ItemMapper.mapToItemDto(thisItem);
     }
 

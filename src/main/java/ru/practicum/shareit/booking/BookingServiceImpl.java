@@ -2,6 +2,8 @@ package ru.practicum.shareit.booking;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.shareit.checker.Checker;
@@ -84,32 +86,32 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<BookingDto> getAllBookingByUser(Long userId, String status) {
-
+    public List<BookingDto> getAllBookingByUser(Long userId, String status, int from, int size) {
+        Pageable page = PageRequest.of( from / size, size);
         try {
             switch (State.valueOf(status)) {
                 case CURRENT:
                     return BookingMapper.mapToBookingDto(
                             bookingRepository.findAllByBookerIdAndStartBeforeAndEndAfterOrderByStartDesc(
-                                    userId, LocalDateTime.now(), LocalDateTime.now()));
+                                    userId, LocalDateTime.now(), LocalDateTime.now(), page));
                 case FUTURE:
                     return BookingMapper.mapToBookingDto(
                             bookingRepository.findAllByBookerIdAndStartAfterOrderByStartDesc(userId,
-                                    LocalDateTime.now()));
+                                    LocalDateTime.now(), page));
                 case PAST:
                     return BookingMapper.mapToBookingDto(
                             bookingRepository.findAllByBookerIdAndEndBeforeOrderByStartDesc(userId,
-                                    LocalDateTime.now()));
+                                    LocalDateTime.now(), page));
                 case REJECTED:
                     return BookingMapper.mapToBookingDto(
-                            bookingRepository.findAllByBookerIdAndStatusOrderByStartDesc(userId, REJECTED));
+                            bookingRepository.findAllByBookerIdAndStatusOrderByStartDesc(userId, REJECTED, page));
 
                 case WAITING:
                     return BookingMapper.mapToBookingDto(
-                            bookingRepository.findAllByBookerIdAndStatusOrderByStartDesc(userId, WAITING));
+                            bookingRepository.findAllByBookerIdAndStatusOrderByStartDesc(userId, WAITING, page));
                 default:
                     return BookingMapper.mapToBookingDto(
-                            bookingRepository.findAllByBookerIdOrderByStartDesc(userId));
+                            bookingRepository.findAllByBookerIdOrderByStartDesc(userId, page));
             }
         } catch (IllegalArgumentException e) {
             throw new UnsupportedBookingStateException(String.format("Unknown state: %s", status));
@@ -118,31 +120,35 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<BookingDto> getAllBookingByOwner(Long userId, String status) {
+    public List<BookingDto> getAllBookingByOwner(Long userId, String status, int from, int size) {
+      /*  if (from < 0) throw new ValidationException(String.format("Не верный параметр пагинации size = %d", from));
+      //  if (size < 1)  throw new ValidationException(String.format("Не верный параметр пагинации size = %d", size));*/
+
+        Pageable page = PageRequest.of( from / size, size);
         try {
             switch (State.valueOf(status)) {
                 case CURRENT:
                     return BookingMapper.mapToBookingDto(
                             bookingRepository.findAllByItemOwnerIdAndStartBeforeAndEndAfterOrderByStartDesc(
-                                    userId, LocalDateTime.now(), LocalDateTime.now()));
+                                    userId, LocalDateTime.now(), LocalDateTime.now(), page));
                 case FUTURE:
                     return BookingMapper.mapToBookingDto(
                             bookingRepository.findAllByItemOwnerIdAndStartAfterOrderByStartDesc(
-                                    userId, LocalDateTime.now()));
+                                    userId, LocalDateTime.now(), page));
 
                 case PAST:
                     return BookingMapper.mapToBookingDto(
                             bookingRepository.findAllByItemOwnerIdAndEndBeforeOrderByStartDesc(
-                                    userId, LocalDateTime.now()));
+                                    userId, LocalDateTime.now(), page));
                 case REJECTED:
 
                 case WAITING:
                     return BookingMapper.mapToBookingDto(
                             bookingRepository.findAllByItemOwnerIdAndStatusOrderByStartDesc(
-                                    userId, BookingState.valueOf(status)));
+                                    userId, BookingState.valueOf(status), page));
                 default:
                     return BookingMapper.mapToBookingDto(
-                            bookingRepository.findAllByItemOwnerIdOrderByStartDesc(userId));
+                            bookingRepository.findAllByItemOwnerIdOrderByStartDesc(userId, page));
             }
         } catch (IllegalArgumentException e) {
             throw new UnsupportedBookingStateException(String.format("Unknown state: %s", status));
