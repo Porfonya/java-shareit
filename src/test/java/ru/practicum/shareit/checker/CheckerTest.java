@@ -19,6 +19,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
@@ -34,16 +35,14 @@ class CheckerTest {
     ItemRequestRepository requestRepository;
     @InjectMocks
     Checker checker;
-
     @Test
     void checkerBooking_thenThrowNotFoundException() {
-        when(bookingRepository.findById(anyLong())).thenThrow(new NotFoundException("Бронь не найден"));
+        when(bookingRepository.findById(any())).thenThrow(new NotFoundException("Бронь не найден"));
 
-        NotFoundException exception = assertThrows(NotFoundException.class,
-                () -> checker.checkerBooking(1L));
+        NotFoundException  exception = assertThrows(NotFoundException.class,
+                ()->checker.checkerBooking(1L));
 
         assertEquals(exception.getMessage(), "Бронь не найден");
-
     }
     @Test
     void checkerBookingWithReturn() {
