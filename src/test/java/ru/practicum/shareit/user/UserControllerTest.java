@@ -35,16 +35,16 @@ class UserControllerTest {
     void createUser() {
 
 
-        when(userService.createUser(any())).thenReturn(expected);
-        UserDto actual = userController.createUser(any());
+        when(userService.createUser(expected)).thenReturn(expected);
+        UserDto actual = userController.createUser(expected);
         assertEquals(expected, actual);
     }
 
     @Test
     void getUserById_whenInvoked_thenResponseStatusOkWithUserBody() {
 
-        when(userService.getUserById(any())).thenReturn(expected);
-        UserDto actual = userController.getUserById(any());
+        when(userService.getUserById(expected.getId())).thenReturn(expected);
+        UserDto actual = userController.getUserById(expected.getId());
         assertEquals(expected, actual);
     }
 
