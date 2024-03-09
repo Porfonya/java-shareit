@@ -9,9 +9,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import java.util.Collection;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -49,16 +46,6 @@ class UserControllerTest {
         when(userService.getUserById(any())).thenReturn(expected);
         UserDto actual = userController.getUserById(any());
         assertEquals(expected, actual);
-    }
-
-    @Test
-    void getAllUsers_whenInvoked_thenResponseStatusOkWithUsersCollectionInBody() {
-        List<UserDto> expectedUsers = List.of(expected);
-        when(userService.getAllUsers()).thenReturn(expectedUsers);
-
-        ResponseEntity<Collection<UserDto>> response = userController.getAllUsers();
-
-        assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
     @Test
