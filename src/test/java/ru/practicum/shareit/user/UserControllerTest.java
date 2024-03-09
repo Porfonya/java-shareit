@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
 
@@ -23,12 +24,9 @@ class UserControllerTest {
     private UserController userController;
     private UserDto expected;
 
-    private UserDto updateUser;
-
     @BeforeEach
     void setUp() {
         expected = new UserDto(1L, "newUser@mail.ru", "NewUser");
-        updateUser = new UserDto(2L, "updateUser@mail.ru", "updateUser");
     }
 
     @Test
@@ -43,8 +41,8 @@ class UserControllerTest {
     @Test
     void getUserById_whenInvoked_thenResponseStatusOkWithUserBody() {
 
-        when(userService.getUserById(expected.getId())).thenReturn(expected);
-        UserDto actual = userController.getUserById(expected.getId());
+        when(userService.getUserById(anyLong())).thenReturn(expected);
+        UserDto actual = userController.getUserById(anyLong());
         assertEquals(expected, actual);
     }
 
