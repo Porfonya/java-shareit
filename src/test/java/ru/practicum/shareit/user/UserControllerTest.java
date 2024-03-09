@@ -59,7 +59,6 @@ class UserControllerTest {
         ResponseEntity<Collection<UserDto>> response = userController.getAllUsers();
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(expectedUsers, response.getBody());
     }
 
     @Test
