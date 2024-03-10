@@ -50,7 +50,12 @@ public class Item {
         if (this == o) return true;
         if (!(o instanceof Item)) return false;
         Item item = (Item) o;
-        return Objects.equals(id, item.id) && Objects.equals(name, item.name) && Objects.equals(description, item.description) && Objects.equals(available, item.available) && Objects.equals(owner, item.owner) && Objects.equals(itemRequest, item.itemRequest) && Objects.equals(comment, item.comment);
+        return Objects.equals(id, item.id) && Objects.equals(name, item.name)
+                && Objects.equals(description, item.description)
+                && Objects.equals(available, item.available)
+                && Objects.equals(owner, item.owner)
+                && Objects.equals(itemRequest, item.itemRequest)
+                && Objects.equals(comment, item.comment);
     }
 
     @Override
