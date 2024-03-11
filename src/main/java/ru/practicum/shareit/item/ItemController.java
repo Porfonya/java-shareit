@@ -33,6 +33,7 @@ public class ItemController {
                               @RequestBody ItemDto itemDto) {
         log.info("Выполнеине запроса PatchMapping");
         User user = checker.checkerUserWithReturn(userId);
+        log.info("Проверили юзера");
         Item item = checker.checkerItem(id);
         return itemService.updateItem(user, item, itemDto);
     }

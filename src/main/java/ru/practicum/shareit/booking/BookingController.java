@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import ru.practicum.shareit.checker.Checker;
 import ru.practicum.shareit.user.User;
 
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 import java.util.List;
 
 @RestController
@@ -45,21 +47,25 @@ public class BookingController {
     @GetMapping()
     public List<BookingDto> getAllBookingsUser(
             @RequestHeader("X-Sharer-User-Id") Long userId,
-            @RequestParam(required = false, defaultValue = "ALL") String state) {
+            @RequestParam(required = false, defaultValue = "ALL") String state,
+            @RequestParam(name = "from", defaultValue = "0") @PositiveOrZero int from,
+            @RequestParam(name = "size", defaultValue = "10") @Positive int size) {
 
         log.info("Выполнение запроса Get метода getAllBookingsUser ");
         checker.checkerUser(userId);
-        return bookingService.getAllBookingByUser(userId, state);
+        return bookingService.getAllBookingByUser(userId, state, from, size);
 
     }
 
     @GetMapping("/owner")
     public List<BookingDto> getAllBookingsOwner(
             @RequestHeader("X-Sharer-User-Id") Long userId,
-            @RequestParam(required = false, defaultValue = "ALL") String state) {
+            @RequestParam(required = false, defaultValue = "ALL") String state,
+            @RequestParam(name = "from", defaultValue = "0") @PositiveOrZero int from,
+            @RequestParam(name = "size", defaultValue = "10") @Positive int size) {
         log.info("Выполнение запроса Get метода getAllBookingsOwner ");
         checker.checkerUser(userId);
-        return bookingService.getAllBookingByOwner(userId, state);
+        return bookingService.getAllBookingByOwner(userId, state, from, size);
     }
 
 }

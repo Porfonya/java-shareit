@@ -19,7 +19,7 @@ public class ErrorHandler {
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ErrorResponse handleUnknownStateExceptions(final InternalServiceException e) {
+    public ErrorResponse handleInternalServiceException(final InternalServiceException e) {
         return new ErrorResponse(e.getMessage());
     }
 

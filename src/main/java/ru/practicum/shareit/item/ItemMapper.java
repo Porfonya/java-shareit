@@ -16,6 +16,16 @@ public class ItemMapper {
                 .build();
 
     }
+    public static ItemDto mapToItemRequestDto(Item item) {
+        return ItemDto.builder()
+                .id(item.getId())
+                .name(item.getName())
+                .description(item.getDescription())
+                .available(item.getAvailable())
+                .requestId(item.getItemRequest().getId())
+                .build();
+
+    }
 
     public static Item mapToItem(ItemDto itemDto) {
 
@@ -29,9 +39,7 @@ public class ItemMapper {
 
     public static List<ItemDto> mapToItemDto(Iterable<Item> items) {
         List<ItemDto> valuesDtos = new ArrayList<>();
-        for (Item item : items) {
-            valuesDtos.add(mapToItemDto(item));
-        }
+        for (Item item : items) valuesDtos.add(mapToItemDto(item));
         return valuesDtos;
     }
 

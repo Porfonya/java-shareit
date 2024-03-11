@@ -26,7 +26,7 @@ public class UserController {
 
     @GetMapping("/{id}")
     public UserDto getUserById(@PathVariable("id") Long userId) {
-        log.info("Найден пользователь с id{}", userId);
+        log.info("Найден пользователь с id {}", userId);
         return userService.getUserById(userId);
     }
 
@@ -46,6 +46,6 @@ public class UserController {
     public ResponseEntity<String> deleteUserById(@PathVariable("id") Long userId) {
         userService.deleteUser(userId);
         log.info("Пользователь удален");
-        return new ResponseEntity<>("User deleted", HttpStatus.OK);
+        return new ResponseEntity<>("Пользователь удален", HttpStatus.OK);
     }
 }
