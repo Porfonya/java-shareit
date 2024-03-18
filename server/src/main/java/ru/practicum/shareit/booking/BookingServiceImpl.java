@@ -121,8 +121,6 @@ public class BookingServiceImpl implements BookingService {
     @Override
     @Transactional(readOnly = true)
     public List<BookingDto> getAllBookingByOwner(Long userId, String status, int from, int size) {
-      /*  if (from < 0) throw new ValidationException(String.format("Не верный параметр пагинации size = %d", from));
-      //  if (size < 1)  throw new ValidationException(String.format("Не верный параметр пагинации size = %d", size));*/
 
         Pageable page = PageRequest.of(from / size, size);
         try {

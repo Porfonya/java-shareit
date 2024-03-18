@@ -19,7 +19,7 @@ public class ItemController {
     @PostMapping
     public ResponseEntity<Object> create(@RequestHeader("X-Sharer-User-Id") Long userId,
                                          @Valid @RequestBody ItemDto itemDto) {
-
+        log.info("Выполнеине запроса PostMapping, создание ItemDto");
         return itemClient.createItem(userId, itemDto);
     }
 
@@ -59,7 +59,7 @@ public class ItemController {
     public ResponseEntity<Object> addCommentById(@PathVariable Long itemId,
                                                  @RequestHeader("X-Sharer-User-Id") Long userId,
                                                  @RequestBody CommentDto comment) {
-
+        log.info("Выполнеине запроса PostMapping создание комментария");
         return itemClient.createComment(itemId, userId, comment);
     }
 
