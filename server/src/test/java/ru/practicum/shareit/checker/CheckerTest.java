@@ -20,7 +20,6 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
@@ -78,6 +77,7 @@ class CheckerTest {
 
         assertEquals(exception.getMessage(), "Инструмент не найден");
     }
+
     @Test
     void checkerItemWithReturn() {
         Item item = new Item(1L,
@@ -93,6 +93,7 @@ class CheckerTest {
         Item actual = checker.checkerItem(1L);
         assertEquals(actual, item);
     }
+
     @Test
     void checkerItemRequest_thenThrowNotFoundException() {
         when(requestRepository.findById(anyLong())).thenThrow(new NotFoundException("Запрос не найден"));
@@ -102,6 +103,7 @@ class CheckerTest {
 
         assertEquals(exception.getMessage(), "Запрос не найден");
     }
+
     @Test
     void checkerItemRequestWithReturn() {
         ItemRequest itemRequest = new ItemRequest();

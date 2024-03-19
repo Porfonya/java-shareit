@@ -13,7 +13,8 @@ import javax.validation.ValidatorFactory;
 import java.util.Set;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+
 @JsonTest
 class ItemDtoTest {
     private Validator validator;

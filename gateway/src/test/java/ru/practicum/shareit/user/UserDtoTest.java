@@ -17,7 +17,7 @@ import javax.validation.ValidatorFactory;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+
 @JsonTest
 class UserDtoTest {
     private final ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
@@ -73,7 +73,6 @@ class UserDtoTest {
                     .contains(expectedMessage);
         }
     }
-
 
 
 }

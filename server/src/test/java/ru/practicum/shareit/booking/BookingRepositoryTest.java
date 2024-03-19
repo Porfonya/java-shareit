@@ -2,7 +2,6 @@ package ru.practicum.shareit.booking;
 
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -10,15 +9,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import ru.practicum.shareit.item.Item;
-import ru.practicum.shareit.item.ItemDto;
 import ru.practicum.shareit.user.User;
-import ru.practicum.shareit.user.UserDto;
 
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.ArgumentMatchers.any;
 
 @DataJpaTest
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
@@ -28,7 +24,6 @@ class BookingRepositoryTest {
 
     private static final Pageable PAGE_FOR_BOOKINGS =
             PageRequest.of(0, 10, Sort.by("start").descending());
-
 
 
     @Test
