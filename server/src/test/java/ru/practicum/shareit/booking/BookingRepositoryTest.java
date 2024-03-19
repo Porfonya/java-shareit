@@ -65,8 +65,8 @@ class BookingRepositoryTest {
         Long bookerId = 1L;
         LocalDateTime start = LocalDateTime.now().plusDays(2);
         LocalDateTime end = LocalDateTime.now().plusDays(3);
-        assertDoesNotThrow(() -> bookingRepository.
-                findAllByBookerIdAndStartBeforeAndEndAfterOrderByStartDesc(bookerId, start, end, PAGE_FOR_BOOKINGS));
+        assertDoesNotThrow(() -> bookingRepository.findAllByBookerIdAndStartBeforeAndEndAfterOrderByStartDesc(bookerId,
+                start, end, PAGE_FOR_BOOKINGS));
     }
 
     @Test
@@ -74,64 +74,63 @@ class BookingRepositoryTest {
         Long ownerId = 1L;
         LocalDateTime start = LocalDateTime.now().plusDays(2);
         LocalDateTime end = LocalDateTime.now().plusDays(3);
-        assertDoesNotThrow(() -> bookingRepository.
-                findAllByItemOwnerIdAndStartBeforeAndEndAfterOrderByStartDesc(ownerId, start, end, PAGE_FOR_BOOKINGS));
+        assertDoesNotThrow(() -> bookingRepository.findAllByItemOwnerIdAndStartBeforeAndEndAfterOrderByStartDesc(
+                ownerId, start, end, PAGE_FOR_BOOKINGS));
     }
 
     @Test
     void findAllByBookerIdAndStartAfterOrderByStartDesc() {
         Long bookerId = 1L;
         LocalDateTime start = LocalDateTime.now().plusDays(2);
-        assertDoesNotThrow(() -> bookingRepository.
-                findAllByBookerIdAndStartAfterOrderByStartDesc(bookerId, start, PAGE_FOR_BOOKINGS));
+        assertDoesNotThrow(() -> bookingRepository.findAllByBookerIdAndStartAfterOrderByStartDesc(
+                bookerId, start, PAGE_FOR_BOOKINGS));
     }
 
     @Test
     void findAllByItemOwnerIdAndStartAfterOrderByStartDesc() {
         Long ownerId = 1L;
         LocalDateTime start = LocalDateTime.now().plusDays(2);
-        assertDoesNotThrow(() -> bookingRepository.
-                findAllByBookerIdAndStartAfterOrderByStartDesc(ownerId, start, PAGE_FOR_BOOKINGS));
+        assertDoesNotThrow(() -> bookingRepository.findAllByBookerIdAndStartAfterOrderByStartDesc(ownerId,
+                start, PAGE_FOR_BOOKINGS));
     }
 
     @Test
     void findAllByBookerIdAndEndBeforeOrderByStartDesc() {
         Long bookerId = 1L;
         LocalDateTime end = LocalDateTime.now().plusDays(3);
-        assertDoesNotThrow(() -> bookingRepository.
-                findAllByBookerIdAndEndBeforeOrderByStartDesc(bookerId, end, PAGE_FOR_BOOKINGS));
+        assertDoesNotThrow(() -> bookingRepository.findAllByBookerIdAndEndBeforeOrderByStartDesc(bookerId, end,
+                PAGE_FOR_BOOKINGS));
     }
 
     @Test
     void findAllByItemOwnerIdAndEndBeforeOrderByStartDesc() {
         Long ownerId = 1L;
         LocalDateTime end = LocalDateTime.now().plusDays(3);
-        assertDoesNotThrow(() -> bookingRepository.
-                findAllByItemOwnerIdAndEndBeforeOrderByStartDesc(ownerId, end, PAGE_FOR_BOOKINGS));
+        assertDoesNotThrow(() -> bookingRepository.findAllByItemOwnerIdAndEndBeforeOrderByStartDesc(ownerId,
+                end, PAGE_FOR_BOOKINGS));
     }
 
     @Test
     void findAllByBookerIdAndStatusOrderByStartDesc() {
         Long bookerId = 1L;
         BookingState bookingState = BookingState.WAITING;
-        assertDoesNotThrow(() -> bookingRepository.
-                findAllByBookerIdAndStatusOrderByStartDesc(bookerId, bookingState, PAGE_FOR_BOOKINGS));
+        assertDoesNotThrow(() -> bookingRepository.findAllByBookerIdAndStatusOrderByStartDesc(bookerId,
+                bookingState, PAGE_FOR_BOOKINGS));
     }
 
     @Test
     void findAllByItemOwnerIdAndStatusOrderByStartDesc() {
         Long ownerId = 1L;
         BookingState bookingState = BookingState.WAITING;
-        assertDoesNotThrow(() -> bookingRepository.
-                findAllByItemOwnerIdAndStatusOrderByStartDesc(ownerId, bookingState, PAGE_FOR_BOOKINGS));
+        assertDoesNotThrow(() -> bookingRepository.findAllByItemOwnerIdAndStatusOrderByStartDesc(ownerId,
+                bookingState, PAGE_FOR_BOOKINGS));
     }
 
     @Test
     void findTop2ByItemIdAndStatusOrderByEndAsc() {
         Long itemId = 1L;
         BookingState bookingState = BookingState.WAITING;
-        assertDoesNotThrow(() -> bookingRepository.
-                findTop2ByItemIdAndStatusOrderByEndAsc(itemId, bookingState));
+        assertDoesNotThrow(() -> bookingRepository.findTop2ByItemIdAndStatusOrderByEndAsc(itemId, bookingState));
     }
 
     @Test
@@ -140,16 +139,15 @@ class BookingRepositoryTest {
         Long itemId = 1L;
         BookingState bookingState = BookingState.WAITING;
         LocalDateTime end = LocalDateTime.now().plusDays(3);
-        assertDoesNotThrow(() -> bookingRepository.
-                findBookingsByBookerIdAndItemIdAndStatusAndEndBefore(bookerId, itemId, bookingState, end));
+        assertDoesNotThrow(() -> bookingRepository.findBookingsByBookerIdAndItemIdAndStatusAndEndBefore(bookerId,
+                itemId, bookingState, end));
     }
 
     @Test
     void findTop1ByItemIdAndStartBeforeOrderByStartDesc() {
         Long itemId = 1L;
         LocalDateTime start = LocalDateTime.now().plusDays(2);
-        assertDoesNotThrow(() -> bookingRepository.
-                findTop1ByItemIdAndStartBeforeOrderByStartDesc(itemId, start));
+        assertDoesNotThrow(() -> bookingRepository.findTop1ByItemIdAndStartBeforeOrderByStartDesc(itemId, start));
     }
 
     @Test
@@ -157,8 +155,7 @@ class BookingRepositoryTest {
         Long itemId = 1L;
         LocalDateTime start = LocalDateTime.now().plusDays(2);
 
-        assertDoesNotThrow(() -> bookingRepository.
-                findTop1ByItemIdAndStartAfterOrderByStartAsc(itemId, start));
+        assertDoesNotThrow(() -> bookingRepository.findTop1ByItemIdAndStartAfterOrderByStartAsc(itemId, start));
     }
 
 }
