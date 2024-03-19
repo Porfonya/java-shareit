@@ -1,6 +1,7 @@
 package ru.practicum.shareit.booking;
 
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import ru.practicum.shareit.item.Item;
+import ru.practicum.shareit.item.ItemDto;
 import ru.practicum.shareit.user.User;
+import ru.practicum.shareit.user.UserDto;
 
 import java.time.LocalDateTime;
 
@@ -26,21 +29,36 @@ class BookingRepositoryTest {
     private static final Pageable PAGE_FOR_BOOKINGS =
             PageRequest.of(0, 10, Sort.by("start").descending());
 
-    User user;
-    Item item;
-    private Booking booking;
 
-    @BeforeEach
-    void setUp() {
 
-        booking = Booking.builder()
-                .id(any())
+    @Test
+    @SneakyThrows
+    void save_whenAllFieldsExists_thenBookingSaved() {
+        var user = new User(
+                1L,
+                "email@mail.ru",
+                "User name"
+
+        );
+        var item = Item.builder()
+                .id(1L)
+                .name("name")
+                .description("description")
+                .available(null)
+                .build();
+
+        Booking booking = Booking.builder()
+                .id(1L)
                 .start(LocalDateTime.now())
                 .end(LocalDateTime.now().plusMinutes(5))
                 .build();
 
-    }
+        booking.setStatus(BookingState.WAITING);
+        booking.setBooker(user);
+        booking.setItem(item);
 
+        assertNotNull(booking);
+    }
 
     @Test
     void findAllByBookerIdOrderByStartDesc() {
