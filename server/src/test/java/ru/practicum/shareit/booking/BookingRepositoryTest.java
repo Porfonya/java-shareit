@@ -29,12 +29,7 @@ class BookingRepositoryTest {
     @Test
     @SneakyThrows
     void save_whenAllFieldsExists_thenBookingSaved() {
-        var user = new User(
-                1L,
-                "email@mail.ru",
-                "User name"
-
-        );
+        var user = new User(1L, "email@mail.ru", "User name");
         var item = Item.builder()
                 .id(1L)
                 .name("name")
