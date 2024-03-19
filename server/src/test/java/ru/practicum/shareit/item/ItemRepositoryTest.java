@@ -33,7 +33,7 @@ class ItemRepositoryTest {
 
     @BeforeEach
     public void addItems() {
-         ownerOne = User.builder()
+        ownerOne = User.builder()
                 .name("name1")
                 .email("mail1@mail.ru")
                 .build();
@@ -65,9 +65,7 @@ class ItemRepositoryTest {
                 .build());
 
 
-
     }
-
 
 
     @Test
@@ -101,6 +99,7 @@ class ItemRepositoryTest {
         assertEquals(items.size(), 1);
         assertEquals(items.get(0).getItemRequest(), itemRequest);
     }
+
     @Test
     void search_whenDataIsNone_whenReturnEmptyList() {
         List<Item> items = itemRepository.search("none");

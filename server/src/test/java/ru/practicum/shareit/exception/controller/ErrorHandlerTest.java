@@ -5,10 +5,11 @@ import ru.practicum.shareit.exception.*;
 
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ErrorHandlerTest {
     private final ErrorHandler errorHandler = new ErrorHandler();
+
     @Test
     void handleNotFoundException() {
         NotFoundException exception = new NotFoundException("Exception: NotFoundException");
@@ -28,7 +29,7 @@ class ErrorHandlerTest {
         UnsupportedBookingStateException exception =
                 new UnsupportedBookingStateException("Exception: UnsupportedBookingStateException");
         Map<String, String> result = Map.of("error", exception.getMessage());
-       assertEquals(exception.getMessage(), result.get("error"));
+        assertEquals(exception.getMessage(), result.get("error"));
 
     }
 
